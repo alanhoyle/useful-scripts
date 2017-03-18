@@ -1,0 +1,25 @@
+#!/bin/bash
+
+last_update="$HOME/Library/Application Support/Homebrew/last_update.txt"
+
+touch "$last_update"
+
+echo Brew previous updated at $(cat "$last_update").
+
+echo "-----  Updating...  -----" &&
+brew update &&
+echo "-----  Upgrading...  -----" &&
+brew -v upgrade  &&
+
+echo ----- linking apps and cleanup ----- &&
+brew cleanup
+
+if [ ! -u /usr/local/Cellar/htop/*/bin/htop ] ; then
+    sudo chmod -v u+s /usr/local/Cellar/htop/*/bin/htop
+fi
+
+if [ -O /usr/local/Cellar/htop/*/bin/htop ] ; then
+    sudo chown -v root /usr/local/Cellar/htop/*/bin/htop
+fi
+echo $(date) > "$last_update"
+echo Brew updated as of $(cat "$last_update").
