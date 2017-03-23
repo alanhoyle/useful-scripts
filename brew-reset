@@ -1,0 +1,9 @@
+#!/bin/bash
+set -ioe pipefail
+
+echo "-----  Resetting homebrew git repo  -----" &&
+cd $(brew --repo); git fetch; git reset --hard origin/master
+
+echo "-----  Upgrading...  -----" &&
+brew-upgrade
+

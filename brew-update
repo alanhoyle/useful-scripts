@@ -1,6 +1,10 @@
 #!/bin/bash
 
-last_update="$HOME/Library/Application Support/Homebrew/last_update.txt"
+
+
+update_path="$HOME/Library/Application Support/Homebrew"
+mkdir -p "${update_path}"
+last_update="${update_path}/last_update.txt"
 
 touch "$last_update"
 
@@ -21,5 +25,5 @@ fi
 if [ -O /usr/local/Cellar/htop/*/bin/htop ] ; then
     sudo chown -v root /usr/local/Cellar/htop/*/bin/htop
 fi
-echo $(date) > "$last_update"
+echo $(date) > "${last_update}"
 echo Brew updated as of $(cat "$last_update").
