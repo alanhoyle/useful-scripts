@@ -1,6 +1,6 @@
 #!/bin/bash
 
-
+# Update the last loaded date....
 
 update_path="$HOME/Library/Application Support/Homebrew"
 mkdir -p "${update_path}"
@@ -15,8 +15,12 @@ brew update &&
 echo "-----  Upgrading...  -----" &&
 brew -v upgrade  &&
 
-echo ----- linking apps and cleanup ----- &&
+echo ----- Cleanup old installs ----- &&
 brew cleanup
+
+
+# htop needs root permissions to work properly and I prefer this method to 
+# using sudo every time I run htop.  
 
 if [ ! -u /usr/local/Cellar/htop/*/bin/htop ] ; then
     sudo chmod -v u+s /usr/local/Cellar/htop/*/bin/htop
@@ -25,5 +29,6 @@ fi
 if [ -O /usr/local/Cellar/htop/*/bin/htop ] ; then
     sudo chown -v root /usr/local/Cellar/htop/*/bin/htop
 fi
+
 echo $(date) > "${last_update}"
 echo Brew updated as of $(cat "$last_update").
