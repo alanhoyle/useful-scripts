@@ -1,11 +1,27 @@
 #!/bin/bash
 
+
+if [ "$( crontab -l )" == "" ] ; then
+	echo "$USER has no crontab, skipping."
+	exit 0
+fi
+
+
 cronfile=$HOME/crontab.$HOSTNAME.$(date +"%F_%T" --utc)
 
 crontab -l > $cronfile
 
-MESSAGE="# crontab disabled.  To restore, run the following\n# crontab $cronfile" 
+# put some logic here that does something like:
+# if [ "$( diff <( crontab -l ) $cronfile -q )" != "" ] ; then
 
-echo -e $MESSAGE |crontab
+    MESSAGE="# crontab disabled.  To restore, run the following\n# crontab $cronfile" 
 
-echo -e $MESSAGE
+    echo -e $MESSAGE |crontab
+
+    echo -e $MESSAGE
+
+#else
+#	echo "crontab -l is not the same as $cronfile.  something messed up in the save step. "
+#fi
+
+
