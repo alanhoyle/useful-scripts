@@ -6,8 +6,11 @@ touch "$last_update"
 
 echo Brew previous updated at $(cat "$last_update").
 
+sleep 2
+
 echo "-----  Updating...  -----" &&
 brew update &&
+sleep 2 &&
 echo "-----  Upgrading...  -----" &&
 brew -v upgrade  &&
 
