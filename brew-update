@@ -14,7 +14,9 @@ sleep 2
 
 echo "-----  Updating...  -----" &&
 brew update &&
-sleep 2 &&
+echo -e 'upgrading in 3...' && sleep 1 &&
+echo -e 'upgrading in 2...' && sleep 1 &&
+echo -e 'upgrading in 1...' && sleep 1 &&
 echo "-----  Upgrading...  -----" &&
 brew -v upgrade  &&
 
