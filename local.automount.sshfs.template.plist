@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+
+Install sshfs and FUSE for macOS
+
+create a directory for each mount.  
+    (e.g. /Users/username/Remote/TEMPLATE)
+
+Edit the below file.
+
+The <array> section is a command line.   
+volname should be what you want it to be named as in the Finder.
+
+place this file in ~/Library/LaunchAgents and rename the "TEMPLATE.
+
+launchctl load local.automount.sshfs.TEMPLATE.plist
+launchctl start local.automount.sshfs.TEMPLATE
+launchctl stop local.automount.sshfs.TEMPLATE
+launchctl unload local.automount.sshfs.TEMPLATE
+
+
+-->
+<plist version="1.0">
+    <dict>
+        <key>AbandonProcessGroup</key>
+        <true/>
+        <key>Label</key>
+        <string>local.automount.sshfs.TEMPLATE</string>
+        <key>ProgramArguments</key>
+        <array>
+            <string>/usr/local/bin/sshfs</string>
+            <string>-o</string>
+            <string>volname=TEMPLATE</string>
+            <string>username@example.com:/PATH/TO/REMOTE/TARGET</string>
+            <string>/Users/username/Remote/TEMPLATE</string>
+        </array>
+        <key>RunAtLoad</key>
+        <true/>
+        <key>KeepAlive</key>
+        <true/>
+    </dict>
+</plist>
