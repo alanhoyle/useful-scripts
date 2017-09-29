@@ -2,22 +2,40 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <!--
 
-Install sshfs and FUSE for macOS
+Install sshfs and FUSE for macOS.  
 
-create a directory for each mount.  
+  sshfs:  install with brew install sshfs
+  FUSE for macOS:  download from https://osxfuse.github.io/
+
+Create a directory for each mount.  
     (e.g. /Users/username/Remote/TEMPLATE)
+
+Manual mount, assuming that you've created the above directory:
+
+    sshfs -o volname=TEMPLATE username@example.com:/PATH/TO/REMOTE/TARGET /Users/username/Remote/TEMPLATE
+
+  (as a reminder, the '-o volname=TEMPLATE' needs to go together as '-o' means 'the next parameter
+   is a setting for sshfs.)
+
+Manual unmount:
+
+    umount -f /Users/username/Remote/TEMPLATE
+
+Automate the process:
 
 Edit the below file.
 
-The <array> section is a command line.   
+The <array> section is the separated out command line above.   
 volname should be what you want it to be named as in the Finder.
 
-place this file in ~/Library/LaunchAgents and rename the "TEMPLATE.
+Place the resulting plist file in ~/Library/LaunchAgents and rename TEMPLATE 
 
-launchctl load local.automount.sshfs.TEMPLATE.plist
-launchctl start local.automount.sshfs.TEMPLATE
-launchctl stop local.automount.sshfs.TEMPLATE
-launchctl unload local.automount.sshfs.TEMPLATE
+    launchctl load local.automount.sshfs.TEMPLATE.plist
+    launchctl start local.automount.sshfs.TEMPLATE
+    launchctl stop local.automount.sshfs.TEMPLATE
+    launchctl unload local.automount.sshfs.TEMPLATE
+
+
 
 
 -->
