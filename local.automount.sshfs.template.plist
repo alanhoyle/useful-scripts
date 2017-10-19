@@ -12,7 +12,7 @@ Create a directory for each mount.
 
 Manual mount, assuming that you've created the above directory:
 
-    sshfs -o volname=TEMPLATE username@example.com:/PATH/TO/REMOTE/TARGET /Users/username/Remote/TEMPLATE
+    sshfs -o reconnect,ServerAliveInterval=15,ServerAliveCountMax=3,volname=TEMPLATE_NAME_FOR_FINDER username@example.com:/PATH/TO/REMOTE/TARGET /Users/username/Remote/TEMPLATE
 
   (as a reminder, the '-o volname=TEMPLATE' needs to go together as '-o' means 'the next parameter
    is a setting for sshfs.)
@@ -49,7 +49,7 @@ Place the resulting plist file in ~/Library/LaunchAgents and rename TEMPLATE
         <array>
             <string>/usr/local/bin/sshfs</string>
             <string>-o</string>
-            <string>volname=TEMPLATE</string>
+            <string>reconnect,ServerAliveInterval=15,ServerAliveCountMax=3,volname=TEMPLATE_NAME_FOR_FINDER</string>
             <string>username@example.com:/PATH/TO/REMOTE/TARGET</string>
             <string>/Users/username/Remote/TEMPLATE</string>
         </array>
