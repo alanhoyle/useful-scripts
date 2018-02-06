@@ -28,10 +28,12 @@ brew cleanup
 # using sudo every time I run htop.  
 
 if [ ! -u /usr/local/Cellar/htop/*/bin/htop ] ; then
+    echo "Need to chmod htop binary: sudo will happen next, so expect a prompt"
     sudo chmod -v u+s /usr/local/Cellar/htop/*/bin/htop
 fi
 
 if [ -O /usr/local/Cellar/htop/*/bin/htop ] ; then
+    echo "Need to chown htop binary: sudo will happen next.""
     sudo chown -v root /usr/local/Cellar/htop/*/bin/htop
 fi
 
