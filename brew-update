@@ -33,7 +33,7 @@ if [ ! -u /usr/local/Cellar/htop/*/bin/htop ] ; then
 fi
 
 if [ -O /usr/local/Cellar/htop/*/bin/htop ] ; then
-    echo "Need to chown htop binary: sudo will happen next.""
+    echo "Need to chown htop binary: sudo will happen next."
     sudo chown -v root /usr/local/Cellar/htop/*/bin/htop
 fi
 
