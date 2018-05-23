@@ -2,6 +2,16 @@
 
 # Update the last loaded date....
 
+
+
+if [[ -d "$TMPDIR" ]] ; then
+
+    cd $TMPDIR
+
+fi
+
+set -euo pipefail
+
 update_path="$HOME/Library/Application Support/Homebrew"
 mkdir -p "${update_path}"
 last_update="${update_path}/last_update.txt"
@@ -12,15 +22,15 @@ echo Brew previous updated at $(cat "$last_update").
 
 sleep 2
 
-echo "-----  Updating...  -----" &&
-brew update &&
-echo -e 'upgrading in 3...' && sleep 1 &&
-echo -e 'upgrading in 2...' && sleep 1 &&
-echo -e 'upgrading in 1...' && sleep 1 &&
-echo "-----  Upgrading...  -----" &&
-brew -v upgrade  &&
+echo "-----  Updating...  -----" 
+brew update
+echo -e 'upgrading in 3...' && sleep 1 
+echo -e 'upgrading in 2...' && sleep 1 
+echo -e 'upgrading in 1...' && sleep 1 
+echo "-----  Upgrading...  -----" 
+brew -v upgrade  
 
-echo ----- Cleanup old installs ----- &&
+echo ----- Cleanup old installs ----- 
 brew cleanup
 
 
