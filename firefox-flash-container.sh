@@ -3,16 +3,23 @@
 
 # Docker image: docker pull beli/firefox-flash
 
-# Source code:
-# https://bitbucket.org/beli-sk/docker-firefox/src
-# https://hub.docker.com/r/beli/firefox-flash/
-
-# also need to install xpra:
-#      https://xpra.org/
-#   also available in homebrew:  brew install homebrew/cask/xpra
-#   in various unix repos: apt-get install xpra
+# Source code for container(s):
+#    https://bitbucket.org/beli-sk/docker-firefox/src
+#    https://hub.docker.com/r/beli/firefox-flash/
 
 # ruby is also recommended as it is used to generate a random, unused port number for xpra
+
+DOCKER_IMAGE="beli/firefox-flash"
+
+if [[ -z $( type -P "xpra" ) ]] ; then
+    echo "Xpra is required for $0 to work.  https://xpra.org/"
+    echo "It is also available in homebrew (mac):  "
+    echo "      brew install homebrew/cask/xpra"
+    echo "or in various unix repos: "
+    echo "      apt-get install xpra    # ... or ..."
+    echo "      yum install xpra "
+    exit 0
+fi
 
 [[ $( type -P "ruby" ) ]]  &&
 
@@ -26,6 +33,7 @@ echo "    run this command to resume:"
 echo ""
 echo "    $COMMAND"
 
-docker run -d -p 127.0.0.1:$OPENPORT:10000 --rm beli/firefox-flash
+docker pull $DOCKER_IMAGE &&
+    docker run -d -p 127.0.0.1:$OPENPORT:10000 --rm $DOCKER_IMAGE
 
 $COMMAND
