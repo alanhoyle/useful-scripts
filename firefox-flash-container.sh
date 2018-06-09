@@ -1,4 +1,5 @@
-#! /bin/env bash
+#! /bin/bash
+
 # Run Firefox with the Adobe Flash plugin in a Docker container and serve it to the screen with Xpra.
 
 # Docker image: docker pull beli/firefox-flash
@@ -34,6 +35,5 @@ echo ""
 echo "    $COMMAND"
 
 docker pull $DOCKER_IMAGE &&
-    docker run -d -p 127.0.0.1:$OPENPORT:10000 --rm $DOCKER_IMAGE
-
-$COMMAND
+    docker run -d -p 127.0.0.1:$OPENPORT:10000 --rm $DOCKER_IMAGE &&
+    $COMMAND
