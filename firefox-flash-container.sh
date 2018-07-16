@@ -2,7 +2,8 @@
 
 # Run Firefox with the Adobe Flash plugin in a Docker container and serve it to the screen with Xpra.
 
-# Docker image: docker pull beli/firefox-flash
+# Docker image: docker pull aphoid/firefox-flash
+# can also be used with original source:  docker pull beli/firefox-flash
 
 # Source code for container(s):
 #    https://bitbucket.org/beli-sk/docker-firefox/src
@@ -10,7 +11,7 @@
 
 # ruby is also recommended as it is used to generate a random, unused port number for xpra
 
-DOCKER_IMAGE="beli/firefox-flash"
+DOCKER_IMAGE="aphoid/firefox-flash"
 
 if [[ -z $( type -P "xpra" ) ]] ; then
     echo "Xpra is required for $0 to work.  https://xpra.org/"
